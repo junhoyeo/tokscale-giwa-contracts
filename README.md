@@ -11,9 +11,9 @@ and issues receipts that can become verifiable work history.
 | --- | --- |
 | Tokscale Test USD (`tUSD`) — source verified | [`0x58d5608e89b5c1c3b96481a199756b1a292061a9`](https://sepolia-explorer.giwa.io/address/0x58d5608e89b5c1c3b96481a199756b1a292061a9) |
 | tUSD deployer — source verified | [`0x016af5632b7d2d3bbd2a6e589b65e828d1a5b125`](https://sepolia-explorer.giwa.io/address/0x016af5632b7d2d3bbd2a6e589b65e828d1a5b125) |
-| x402 Upto Permit2 Proxy | [`0x4020A4f3b7b90ccA423B9fabCc0CE57C6C240002`](https://sepolia-explorer.giwa.io/address/0x4020A4f3b7b90ccA423B9fabCc0CE57C6C240002) |
-| x402 Exact Permit2 Proxy | [`0x402085c248EeA27D92E8b30b2C58ed07f9E20001`](https://sepolia-explorer.giwa.io/address/0x402085c248EeA27D92E8b30b2C58ed07f9E20001) |
-| ERC-6492 UniversalSigValidator | [`0xdAcD51A54883eb67D95FAEb2BBfdC4a9a6BD2a3B`](https://sepolia-explorer.giwa.io/address/0xdAcD51A54883eb67D95FAEb2BBfdC4a9a6BD2a3B) |
+| x402 Upto Permit2 Proxy — source verified | [`0x4020A4f3b7b90ccA423B9fabCc0CE57C6C240002`](https://sepolia-explorer.giwa.io/address/0x4020A4f3b7b90ccA423B9fabCc0CE57C6C240002) |
+| x402 Exact Permit2 Proxy — source verified | [`0x402085c248EeA27D92E8b30b2C58ed07f9E20001`](https://sepolia-explorer.giwa.io/address/0x402085c248EeA27D92E8b30b2C58ed07f9E20001) |
+| ERC-6492 UniversalSigValidator — source verified | [`0xdAcD51A54883eb67D95FAEb2BBfdC4a9a6BD2a3B`](https://sepolia-explorer.giwa.io/address/0xdAcD51A54883eb67D95FAEb2BBfdC4a9a6BD2a3B) |
 | ERC-3009 `exact` settlement, 1.0 tUSD | [`0xad1a2f7b...fcb9f8`](https://sepolia-explorer.giwa.io/tx/0xad1a2f7b5aff4033e7779437ec487e8b51eb8170ba1c6c8cc971f6de37fcb9f8) |
 | Permit2 `upto` settlement, maximum 1.5 / actual 1.0 tUSD | [`0x93bf1e60...cd274`](https://sepolia-explorer.giwa.io/tx/0x93bf1e60ce1fa0559603111f96cfcdd081eab17b71fb406a32f88ca1562cd274) |
 
@@ -37,15 +37,19 @@ observed runtime code hash.
 
 ## Public verification status
 
-The GIWA Sepolia Explorer reports both Tokscale-authored contracts as
-source-verified:
+The GIWA Sepolia Explorer reports all contracts deployed by Tokscale for this
+testnet evidence as source-verified:
 
 - [`tUSD` verified contract](https://sepolia-explorer.giwa.io/address/0x58d5608e89b5c1c3b96481a199756b1a292061a9)
 - [`TUSDDeployer` verified contract](https://sepolia-explorer.giwa.io/address/0x016af5632b7d2d3bbd2a6e589b65e828d1a5b125)
+- [`x402UptoPermit2Proxy` verified contract](https://sepolia-explorer.giwa.io/address/0x4020A4f3b7b90ccA423B9fabCc0CE57C6C240002)
+- [`x402ExactPermit2Proxy` verified contract](https://sepolia-explorer.giwa.io/address/0x402085c248EeA27D92E8b30b2C58ed07f9E20001)
+- [`UniversalSigValidator` verified contract](https://sepolia-explorer.giwa.io/address/0xdAcD51A54883eb67D95FAEb2BBfdC4a9a6BD2a3B)
 
-The upstream x402 proxy and ERC-6492 validator deployments are linked for
-on-chain review, with their upstream source provenance recorded in this
-repository. They are not represented as Tokscale-authored source.
+The x402 proxies and ERC-6492 validator are upstream components, deployed by
+Tokscale only to satisfy the facilitator's fixed-address prerequisites. Their
+source is explorer-verified from upstream compilation inputs and is not
+represented as Tokscale-authored work.
 
 ## Scope and safety
 

@@ -1,5 +1,7 @@
 # Tokscale contracts on GIWA Sepolia
 
+[![Tokscale Cover Image](https://mintcdn.com/tokscale-giwa/PZ-qe7GbREC4q3PR/public/assets/tokscale.png?w=2500&fit=max&auto=format&n=PZ-qe7GbREC4q3PR&q=85&s=4fb0cd67454d7f402ed0359238a5663a)](https://tokscale.ai)
+
 This repository is the public source and deployment record for the smart-contract
 infrastructure Tokscale PoC deployed on **GIWA Sepolia** (`eip155:91342`). Tokscale
 is a verified AI gateway: it routes AI requests, accepts x402-shaped payments,

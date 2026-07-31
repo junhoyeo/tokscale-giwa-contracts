@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "network": {
+    "chainId": 91342,
+    "caip2": "eip155:91342",
+    "name": "GIWA Sepolia",
+    "validationRpc": "https://sepolia-rpc.giwa.io",
+    "explorerBaseUrl": "https://sepolia-explorer.giwa.io"
+  },
+  "contracts": {
+    "deployer": {
+      "address": "0x016af5632b7d2d3bbd2a6e589b65e828d1a5b125",
+      "deploymentTransaction": "0x109e586dde5c93d017c9aab8edf5bce305f4fecf9a1220efcb5712752340d7c7",
+      "deploymentBlock": "31330856",
+      "runtimeCodeHash": "0x6d3fc64e2fba6d350620ea9255519ea5ba00ff4fc39fd65d917bbb7acda4b9df",
+      "artifact": "contracts/out/TUSDDeployer.sol/TUSDDeployer.json"
+    },
+    "tusd": {
+      "address": "0x58d5608e89b5c1c3b96481a199756b1a292061a9",
+      "runtimeCodeHash": "0xe873118ea485eb38f761e6912a152a7cade207d9dbee976c6c6a0903e85be696",
+      "domainSeparator": "0xfb33915dcd0f153f16e6b4a76d799992d05edd4003c1bc0eca8885f38e85f0f2",
+      "name": "Tokscale Test USD",
+      "symbol": "tUSD",
+      "decimals": 6,
+      "artifact": "contracts/out/TUSD.sol/TUSD.json"
+    }
+  },
+  "exactAuthorizationProof": {
+    "fundingTransaction": "0x4825cbc662018385016743e91c5cbb009510330e4700d4d23eecd3bcfa915b90",
+    "settlementTransaction": "0xad1a2f7b5aff4033e7779437ec487e8b51eb8170ba1c6c8cc971f6de37fcb9f8",
+    "settlementBlock": "31331118",
+    "payer": "0x02cdd4a6f1308d310d624292a731c2d276310dc5",
+    "facilitator": "0xab5805032f0fd80e56c4d2a0fd72d961500c2cf8",
+    "payTo": "0x016af5632b7d2d3bbd2a6e589b65e828d1a5b125",
+    "amountBaseUnits": "1000000",
+    "authorizationNonce": "0xb4bd68dac0c1e65d5e3cf78da521a805f1ec492db3c5aeb77c870bf36532f725"
+  },
+  "scope": "Test-only ERC-3009 exact evidence. This is not a stablecoin, facilitator deployment, x402 payment route, credit top-up, or authorization for production use."
+}

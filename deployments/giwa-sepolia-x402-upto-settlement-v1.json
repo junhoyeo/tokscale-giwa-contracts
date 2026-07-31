@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "network": {
+    "chainId": 91342,
+    "caip2": "eip155:91342",
+    "name": "GIWA Sepolia",
+    "validationRpc": "https://sepolia-rpc.giwa.io",
+    "explorerBaseUrl": "https://sepolia-explorer.giwa.io"
+  },
+  "uptoSettlementProof": {
+    "settlementTransaction": "0x93bf1e60ce1fa0559603111f96cfcdd081eab17b71fb406a32f88ca1562cd274",
+    "settlementBlock": "31917698",
+    "status": "0x1",
+    "payer": "0x02cdd4a6f1308d310d624292a731c2d276310dc5",
+    "facilitator": "0x02cdd4a6f1308d310d624292a731c2d276310dc5",
+    "payTo": "0x016af5632b7d2d3bbd2a6e589b65e828d1a5b125",
+    "uptoPermit2Proxy": "0x4020a4f3b7b90cca423b9fabcc0ce57c6c240002",
+    "asset": "0x58d5608e89b5c1c3b96481a199756b1a292061a9",
+    "maximumBaseUnits": "1500000",
+    "actualBaseUnits": "1000000",
+    "observedTusdTransfer": {
+      "from": "0x02cdd4a6f1308d310d624292a731c2d276310dc5",
+      "to": "0x016af5632b7d2d3bbd2a6e589b65e828d1a5b125",
+      "value": "1000000"
+    },
+    "settledEventPresent": true,
+    "authorizationNonce": "289811969618067462313612741159045620466",
+    "permit2NonceWordPos": "1132078006320576024662549770152521954",
+    "permit2NonceBitPos": 242,
+    "note": "The transfer moved the ACTUAL (1000000), not the signed MAXIMUM (1500000). That disagreement is the upto scheme: /verify carried the maximum and /settle carried the actual."
+  },
+  "settlementCost": {
+    "gasUsed": "85723",
+    "effectiveGasPrice": "1000256",
+    "l2FeeWei": "85744945088",
+    "l1Fee": "17483945872",
+    "l1GasUsed": "3976",
+    "l1GasPrice": "1093064804",
+    "totalFeeWei": "103228890960",
+    "l1FeeSharePercent": 16.93,
+    "transactionType": "0x2",
+    "payerBalanceDeltaWei": "-103228890960",
+    "gasCaveat": "The facilitator signer was the payer itself, so the sender account and its balance slot were already warm. This is a mild UNDER-estimate of a settlement sent by a distinct facilitator, on the order of one cold-account access (~2600 gas)."
+  },
+  "calldataObservation": {
+    "selector": "ff11e7b4",
+    "wordCount": 14,
+    "calldataLengthBytes": 452,
+    "routedToSettleNotSettleWithPermit": true,
+    "adapterDecoderWouldAccept": true,
+    "note": "x402-rs routed to settle (ff11e7b4, 14 words), not settleWithPermit (0x016c1748, 19 words). Every word-level gate the local adapter's decoder applies (tools/local-x402-adapter/src/main.rs:2101-2178) was re-applied to the mined calldata and passed."
+  },
+  "settleTimingObservation": {
+    "facilitatorImage": "ghcr.io/x402-rs/x402-facilitator@sha256:89ab5c031f48bdb61837a0e0ebd296d9f5d3d34eb49183f5472774ab1b119b0d",
+    "receiptTimeoutSecs": 5,
+    "settleDurationMs": 5113.651,
+    "facilitatorSelfReportedElapsedMs": 5109,
+    "broadcastObservedAfterMs": 480,
+    "minedObservedAfterMs": 2519,
+    "receiptVisibleAfterMs": 2537,
+    "settleReturnedAfterReceiptExistedMs": 2576,
+    "settleHttpStatus": 500,
+    "settleErrorMessage": "transaction was not confirmed within the timeout",
+    "settleReportedTransactionHash": "",
+    "settleBlocksUntilMined": true,
+    "recoverWouldHaveSucceeded": false,
+    "note": "POST /settle DOES block past the point where the receipt exists -- it held for 5113ms while the receipt was readable at 2537ms. But the pinned image still returned HTTP 500 with an EMPTY transaction hash, having failed to observe a receipt that had been available for 2.576s. The settlement itself succeeded on chain. A caller trusting the /settle response alone would report a successful, mined, fee-paid payment as a failure, with no transaction hash to recover from."
+  },
+  "replayObservation": {
+    "replayRejected": true,
+    "rejectionLayer": "facilitator, before broadcast",
+    "revertSelector": "0x756688fe",
+    "revertName": "Permit2 InvalidNonce()",
+    "facilitatorNonceBefore": "10",
+    "facilitatorNonceAfter": "10",
+    "newTransactionBroadcast": false,
+    "permit2NonceBitConsumed": true,
+    "note": "The replayed authorization reverted during eth_estimateGas and was never broadcast. Replay protection is proven by the consumed Permit2 nonce bit, not merely by the error: an UnauthorizedFacilitator revert (0x0f6fae87) would instead have meant the harness sent from the wrong address."
+  },
+  "verification": {
+    "method": "One real upto settlement was driven through the pinned x402-rs facilitator against the live GIWA Sepolia RPC. Timing was measured by an independent chain observer that started before the request was sent and scanned blocks forward from a baseline, so broadcast, mined and receipt-visible timestamps are established without reference to the /settle response. Gas and calldata were read back from the mined transaction through raw JSON-RPC and normalized to decimal from hex.",
+    "harness": "infra/scripts/g1-sepolia-upto/",
+    "transactionsBroadcast": 1,
+    "budgetNote": "Exactly one transaction was broadcast. No facilitator funding transfer was needed because the payer served as the facilitator signer, and the replay never reached the chain."
+  },
+  "scope": "Test-only upto settlement evidence on a test token with an open faucet. This closes the on-chain half of gate G1 steps 4-6. It does NOT clear the pinned facilitator for a synchronous paid route: the /settle receipt-confirmation defect recorded in settleTimingObservation is unresolved, and the gateway's own 5s per-call ceiling (crates/gateway/src/x402.rs:29) leaves no headroom to simply raise receipt_timeout_secs."
+}

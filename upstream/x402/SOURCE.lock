@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "purpose": "local-only x402-rs-compatible Upto proxy fixture; never a public-chain deployment claim",
+  "treeHashAlgorithm": "sha256 of sorted records: relative-path + NUL + sha256(file-bytes) + newline",
+  "canonicalUpto": {
+    "source": "x402-foundation/x402",
+    "revision": "1e5b0454c85959260d4026e921e6e496d0c242d9",
+    "path": "contracts/evm/script/ComputeAddress.s.sol",
+    "create2Deployer": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+    "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+    "salt": "0x000000000000000000000000000000000000000000000000b000000001db633d",
+    "address": "0x4020A4f3b7b90ccA423B9fabCc0CE57C6C240002",
+    "creationCodeHash": "0x8fc4fe6716c36ccaf97702e80c51bcaa14b2c377dcc5e7d3563eab4810ce7bc7",
+    "initCodeHash": "0x74f7a29cbc3c55f87cdef7f7c551643189e8bb62eed9de67753aebc402b83797",
+    "runtimeTemplateCodeHash": "0x8eba8cc9e7574075df345d14509c74bae1c754f3130393583f85fec16f12f0c8",
+    "constructorSpecificRuntimeCodeHash": "0x4662dc27323421a3698be49ac95f7b0dba141c238d31ef543248d1a11f8d8eec"
+  },
+  "canonicalExact": {
+    "source": "x402-foundation/x402",
+    "revision": "1e5b0454c85959260d4026e921e6e496d0c242d9",
+    "path": "contracts/evm/script/ComputeAddress.s.sol",
+    "create2Deployer": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+    "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+    "salt": "0x0000000000000000000000000000000000000000000000003000000007263b0e",
+    "address": "0x402085c248EeA27D92E8b30b2C58ed07f9E20001",
+    "initCodeArtifact": "contracts/evm/script/data/exact-proxy-initcode.hex",
+    "creationCodeHash": "0x1047c5581c4d4441d9e2e65d017af37ef540f4488e5725d9f5ea87db50788df8",
+    "initCodeHash": "0xe774d1d5a07218946ab54efe010b300481478b86861bb17d69c98a57f68a604c",
+    "runtimeCodeHash": "0xce6429c0bb49284660683287c0a8fe548a88379072327d026626909d202048b9",
+    "note": "The pinned initCodeHash (matching ComputeAddress.s.sol's EXACT_INIT_CODE_HASH) is only reproducible from the upstream-frozen script/data/exact-proxy-initcode.hex artifact vendored at script/data/exact-proxy-initcode.hex in this tree, NOT from a fresh forge build of src/x402ExactPermit2Proxy.sol: the original x402-foundation build embedded non-deterministic CBOR metadata that no clean rebuild can regenerate (documented in ComputeAddress.s.sol itself). A local rebuild with this vendor's foundry.toml (solc 0.8.28, cancun, cbor_metadata=false) was attempted for cross-reference and produced a DIFFERENT hash (initCodeHash 0x4dee82e9ee1065ee5ee556276da4ca8c5415dfdd52da5ea41ecd02d217f15bf6, creationCodeHash 0xdfe0c8dcd9f1977d3d4961d8cb497beb102d7be3ffd0dda9745c49d756c18bc5) and MUST NOT be used as a deploy payload. runtimeCodeHash above was independently reproduced by CREATE2-deploying the pinned initCodeHash through the real Arachnid deployer on a disposable local anvil instance (bootstrapped via infra/local-chain/deploy-local.sh's own keyless-deployer raw transaction)."
+  },
+  "sources": [
+    {
+      "name": "x402-foundation/x402",
+      "revision": "1e5b0454c85959260d4026e921e6e496d0c242d9",
+      "archive": "https://github.com/x402-foundation/x402/archive/1e5b0454c85959260d4026e921e6e496d0c242d9.tar.gz",
+      "archiveSha256": "e0dd8395b3960f39aca1c6b49eba585891857c6e72ce8dca334037b3540ef3c7"
+    },
+    {
+      "name": "OpenZeppelin/openzeppelin-contracts",
+      "revision": "fcbae5394ae8ad52d8e580a3477db99814b9d565",
+      "archive": "https://github.com/OpenZeppelin/openzeppelin-contracts/archive/fcbae5394ae8ad52d8e580a3477db99814b9d565.tar.gz",
+      "archiveSha256": "403c45a220fb25299a77a8ce084060831a9d699b69c2afe48228b39c31b5dd30"
+    },
+    {
+      "name": "Uniswap/permit2",
+      "revision": "cc56ad0f3439c502c246fc5cfcc3db92bb8b7219",
+      "archive": "https://github.com/Uniswap/permit2/archive/cc56ad0f3439c502c246fc5cfcc3db92bb8b7219.tar.gz",
+      "archiveSha256": "1f0da63e66c69fa85f2a68af7f598aca8f3354f87e7703aa3abe6522685e9f04"
+    },
+    {
+      "name": "rari-capital/solmate",
+      "revision": "8d910d876f51c3b2585c9109409d601f600e68e1",
+      "archive": "https://github.com/Rari-Capital/solmate/archive/8d910d876f51c3b2585c9109409d601f600e68e1.tar.gz",
+      "archiveSha256": "c5dabbbb15de9fc375281e336bce798c910e7dd6a172940556918767f5974c91"
+    }
+  ],
+  "modules": [
+    {
+      "source": "x402-foundation/x402",
+      "path": "src/x402UptoPermit2Proxy.sol",
+      "sha256": "5f58e5904439b0ae8369c430c7cad33fb96dae3d148b75764ed1c42d6baea912"
+    },
+    {
+      "source": "x402-foundation/x402",
+      "path": "src/x402BasePermit2Proxy.sol",
+      "sha256": "276f1d092f740ede30bb00508b03ae25fc4f64947dde03c4aaa0cccfc73ce1f7"
+    },
+    {
+      "source": "x402-foundation/x402",
+      "path": "src/interfaces/ISignatureTransfer.sol",
+      "sha256": "9ba755409cba5cada98715cc09c9efa50014d6f4c1e98da43e18bc301fe9bbc4"
+    },
+    {
+      "source": "x402-foundation/x402",
+      "path": "src/x402ExactPermit2Proxy.sol",
+      "sha256": "6af38108c14d82dc61bdb719bac865ad138f49d8a06bb548223606d5bf325bae"
+    },
+    {
+      "source": "x402-foundation/x402",
+      "path": "script/data/exact-proxy-initcode.hex",
+      "sha256": "97a6808cc627661cca8d5193a45d388fe42921a23905d78c14ae76120e838cdb"
+    },
+    {
+      "source": "OpenZeppelin/openzeppelin-contracts",
+      "path": "lib/openzeppelin-contracts",
+      "treeSha256": "29a0f271d8f17e1ed1de42cf113c0f874e36b44a9aadfca0c6a5d46204a39337"
+    },
+    {
+      "source": "Uniswap/permit2",
+      "path": "../permit2-local/src",
+      "treeSha256": "8313bc44a512a6c8b4baeaa6c45f2178bf19ae378a5a58460ea03930281b6068"
+    },
+    {
+      "source": "rari-capital/solmate",
+      "path": "../permit2-local/lib/solmate/src",
+      "treeSha256": "5fa302073b0eef743bc95caadd8db2a677192f7ccc6c09b5b87c05e43361f2d6"
+    }
+  ]
+}

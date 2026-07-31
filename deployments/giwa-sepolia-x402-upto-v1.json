@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "network": {
+    "chainId": 91342,
+    "caip2": "eip155:91342",
+    "name": "GIWA Sepolia",
+    "validationRpc": "https://sepolia-rpc.giwa.io",
+    "explorerBaseUrl": "https://sepolia-explorer.giwa.io"
+  },
+  "contracts": {
+    "create2Deployer": {
+      "address": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+      "provenance": "Arachnid deterministic deployment proxy, OP Stack preinstall",
+      "observedRuntimeCodeHash": "0x2fa86add0aed31f33a762c9d88e807c475bd51d0f52bd0955754b2608f7e4989",
+      "pinnedRuntimeCodeHash": "0x2fa86add0aed31f33a762c9d88e807c475bd51d0f52bd0955754b2608f7e4989"
+    },
+    "permit2": {
+      "address": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+      "provenance": "Canonical Uniswap Permit2 address, OP Stack preinstall",
+      "observedRuntimeCodeBytes": 9152,
+      "observedRuntimeCodeHash": "0xe0e8484bb12a73d6804c93de97b18cb6175c9710eaa4f4722f8c94771460dfc9",
+      "pinnedRuntimeCodeHash": "0xe0e8484bb12a73d6804c93de97b18cb6175c9710eaa4f4722f8c94771460dfc9",
+      "sourceByteComparison": "closed; the observed GIWA Sepolia runtime hash equals the repository source-locked constructor-specific Permit2 runtime hash for chain id 91342"
+    },
+    "uptoPermit2Proxy": {
+      "address": "0x4020A4f3b7b90ccA423B9fabCc0CE57C6C240002",
+      "deploymentTransaction": "0xea7708f6a0ac3f2f872b1ea6be99f8d010064d76e5e0e390bc49669a17b66920",
+      "deploymentBlock": "31395852",
+      "deploymentGasUsed": "758819",
+      "deploymentSender": "0x02cDd4a6f1308d310d624292A731c2D276310dc5",
+      "create2Salt": "0x000000000000000000000000000000000000000000000000b000000001db633d",
+      "creationCodeHash": "0x8fc4fe6716c36ccaf97702e80c51bcaa14b2c377dcc5e7d3563eab4810ce7bc7",
+      "initCodeHash": "0x74f7a29cbc3c55f87cdef7f7c551643189e8bb62eed9de67753aebc402b83797",
+      "observedRuntimeCodeBytes": 3142,
+      "observedRuntimeCodeHash": "0x4662dc27323421a3698be49ac95f7b0dba141c238d31ef543248d1a11f8d8eec",
+      "pinnedRuntimeCodeHash": "0x4662dc27323421a3698be49ac95f7b0dba141c238d31ef543248d1a11f8d8eec",
+      "permit2GetterObservation": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+      "artifact": "contracts/vendor/x402-upstream/out/x402UptoPermit2Proxy.sol/x402UptoPermit2Proxy.json",
+      "sourceLock": "contracts/vendor/x402-upstream/SOURCE.lock"
+    },
+    "exactPermit2Proxy": {
+      "address": "0x402085c248EeA27D92E8b30b2C58ed07f9E20001",
+      "observedRuntimeCodeAtUptoValidation": "absent",
+      "subsequentStatus": "deployed",
+      "subsequentDeploymentBlock": "31398196",
+      "subsequentDeploymentRecord": "contracts/deployments/giwa-sepolia-x402-facilitator-prereqs-v1.json",
+      "note": "This proxy was absent when the Upto validation snapshot was recorded. It was deployed later only to satisfy the pinned x402-rs facilitator's unconditional startup prerequisite. Direct ERC-3009 exact settlement does not use this proxy."
+    }
+  },
+  "verification": {
+    "method": "Local source-locked build reproduced the pinned creation and init code hashes, cast compute-address reproduced the canonical CREATE2 address, and the post-deployment runtime code hash and PERMIT2() getter were read back through the validation RPC.",
+    "pinnedConstantsSource": "infra/local-chain/deploy-local.sh (X402_UPTO_SALT, X402_UPTO_CREATION_CODE_HASH, X402_UPTO_INIT_CODE_HASH, X402_UPTO_RUNTIME_CODE_HASH)"
+  },
+  "scope": "Test-only deterministic infrastructure deployment. Permit2 source comparison and the Upto proxy deployment are verified. The ExactPermit2Proxy chronology is retained because its later facilitator-prerequisite deployment is separate from direct ERC-3009 exact settlement. This does not enable a public upto payment route or production use; public upto facilitator behavior, dedicated RPC, and key or treasury custody remain external gates."
+}

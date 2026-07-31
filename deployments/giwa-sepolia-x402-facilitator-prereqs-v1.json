@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "network": {
+    "chainId": 91342,
+    "caip2": "eip155:91342",
+    "name": "GIWA Sepolia",
+    "validationRpc": "https://sepolia-rpc.giwa.io",
+    "explorerBaseUrl": "https://sepolia-explorer.giwa.io"
+  },
+  "scope": "Deploys the two fixed-address infrastructure contracts that the pinned x402-rs facilitator image (ghcr.io/x402-rs/x402-facilitator@sha256:89ab5c031f48bdb61837a0e0ebd296d9f5d3d34eb49183f5472774ab1b119b0d, x402-rs rev 0b14f39afb604a7df25b3496ba34122bdca45a7f) hardcodes in its `assert_contracts_exists` startup check for every configured eip155 chain. This does not enable an upto/Permit2 payment route, credit top-up, or production use; it only satisfies the facilitator's unconditional startup invariant so eip155:91342 can be configured at all. Deployed alongside the already-present canonical Permit2 (0x000000000022D473030F116dDEE9F6B43aC78BA3, OP Stack preinstall) and the Arachnid CREATE2 deployer (0x4e59b44847b379578588920cA78FbF26c0B4956C, OP Stack preinstall).",
+  "contracts": {
+    "create2Deployer": {
+      "address": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+      "provenance": "Arachnid deterministic deployment proxy, OP Stack preinstall",
+      "observedRuntimeCodeHash": "0x2fa86add0aed31f33a762c9d88e807c475bd51d0f52bd0955754b2608f7e4989",
+      "pinnedRuntimeCodeHash": "0x2fa86add0aed31f33a762c9d88e807c475bd51d0f52bd0955754b2608f7e4989"
+    },
+    "permit2": {
+      "address": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+      "provenance": "Canonical Uniswap Permit2 address, OP Stack preinstall",
+      "note": "Already present on GIWA Sepolia prior to this deployment; not re-deployed here. See contracts/deployments/giwa-sepolia-x402-upto-v1.json for its observed runtime code hash."
+    },
+    "exactPermit2Proxy": {
+      "address": "0x402085c248EeA27D92E8b30b2C58ed07f9E20001",
+      "requiredBy": "x402-rs static REQUIRED_CONTRACT_ADDRESSES (EXACT_PERMIT2_PROXY_ADDRESS)",
+      "deploymentTransaction": "0x2e5516c9aa366833c3aaa03e056a8de39af5554da3423c5ec75b8c7bccba4673",
+      "deploymentBlock": "31398196",
+      "deploymentGasUsed": "709183",
+      "deploymentSender": "0x02cDd4a6f1308d310d624292A731c2D276310dc5",
+      "create2Salt": "0x0000000000000000000000000000000000000000000000003000000007263b0e",
+      "creationCodeHash": "0x1047c5581c4d4441d9e2e65d017af37ef540f4488e5725d9f5ea87db50788df8",
+      "initCodeHash": "0xe774d1d5a07218946ab54efe010b300481478b86861bb17d69c98a57f68a604c",
+      "observedRuntimeCodeHash": "0xce6429c0bb49284660683287c0a8fe548a88379072327d026626909d202048b9",
+      "pinnedRuntimeCodeHash": "0xce6429c0bb49284660683287c0a8fe548a88379072327d026626909d202048b9",
+      "permit2GetterObservation": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+      "initCodeArtifact": "contracts/vendor/x402-upstream/script/data/exact-proxy-initcode.hex",
+      "sourceLock": "contracts/vendor/x402-upstream/SOURCE.lock (canonicalExact object)",
+      "provenanceNote": "The pinned initCodeHash is only reproducible from the upstream-frozen script/data/exact-proxy-initcode.hex artifact, not from a fresh forge build (original x402-foundation build embedded non-deterministic CBOR metadata). runtimeCodeHash was independently cross-verified by CREATE2-deploying the pinned initCodeHash through the real Arachnid deployer on a disposable local anvil instance before this real GIWA Sepolia deployment; the anvil gas usage (709183) matched the real deployment exactly."
+    },
+    "erc6492Validator": {
+      "address": "0xdAcD51A54883eb67D95FAEb2BBfdC4a9a6BD2a3B",
+      "requiredBy": "x402-rs static REQUIRED_CONTRACT_ADDRESSES (VALIDATOR_ADDRESS)",
+      "deploymentTransaction": "0x147fdceeb952c35b0c2156417e5d37b797525c2ac3c3ed2b06b955065df4975d",
+      "deploymentBlock": "31398214",
+      "deploymentGasUsed": "567883",
+      "deploymentSender": "0x02cDd4a6f1308d310d624292A731c2D276310dc5",
+      "create2Salt": "0x7834303200000000000000000000000000000000000000000000000000000000",
+      "create2SaltNote": "Vanity-mined salt; the first 4 bytes decode as ASCII \"x402\", zero-padded to 32 bytes.",
+      "initCodeHash": "0x8a457240279c04f74154e0e10ecbeb78d2f2a8b68f5fb09658da494d89bb475e",
+      "observedRuntimeCodeHash": "0x9b83857bbb34de3ba755156ba9bee06532be5ff539bf5de301a28606c76d6cab",
+      "pinnedRuntimeCodeHash": "0x9b83857bbb34de3ba755156ba9bee06532be5ff539bf5de301a28606c76d6cab",
+      "contractName": "UniversalSigValidator",
+      "license": "CC0",
+      "sourceProvenance": {
+        "method": "Sourcify v2 verified match (not a git-revision pin, since this contract has no known x402-foundation source repository attribution)",
+        "sourcifyMatchId": "9040230",
+        "sourcifyChainVerifiedOn": 8453,
+        "sourcifyVerifiedAt": "2025-09-03T12:03:37Z",
+        "creationMatch": "match",
+        "runtimeMatch": "match",
+        "compiler": "solc 0.8.30+commit.73712a01",
+        "compilerSettings": {
+          "viaIR": true,
+          "optimizer": { "enabled": true, "runs": 200 },
+          "evmVersion": "prague",
+          "metadata": { "appendCBOR": false, "bytecodeHash": "none", "useLiteralContent": false }
+        },
+        "onChainCreationRecord": {
+          "chain": "Base mainnet (eip155:8453)",
+          "transactionHash": "0x2eb9da268b0f6e62a4359eb82f7d0cdb1d8c8672d4c4fb6502310f0b3d0f3a45",
+          "blockNumber": "35055502",
+          "transactionIndex": 255,
+          "deployer": "0xfa3F54AE9C4287CA09a486dfaFaCe7d1d4095d93",
+          "to": "0x4e59b44847b379578588920ca78fbf26c0b4956c",
+          "note": "Confirms `to` is the Arachnid CREATE2 deployer; salt and 2402-byte init code were extracted directly from this transaction's calldata (32-byte salt prefix + init code, no constructor args)."
+        },
+        "distinctFromAmbireCanonicalDeployment": "This is a separate CREATE2 deployment of the same open-source Ambire Validator6492 contract (identical source/interface), not Ambire's own canonical ERC-2470 singleton at 0x7dD271FA79Df3A5fEB99F73Bebfa4395b2e4f4bE. Different salt, different resulting address.",
+        "crossChainRuntimeObservation": "The runtime code hash observed on GIWA Sepolia after this deployment (0x9b83857b...) matches both the local anvil pre-deployment dry-run and the address's runtime code as independently observed on Base mainnet, giving three-way cross-chain agreement.",
+        "fullProvenanceRecord": "contracts/vendor/erc6492-validator-upstream/PROVENANCE.json"
+      },
+      "vendoredSource": "contracts/vendor/erc6492-validator-upstream/src/Validator6492.sol",
+      "note": "Not registered in contracts/scripts/verify-source-locks.mjs's automated SOURCE_LOCK_PATHS gate: this contract's provenance format (Sourcify match + on-chain creation-tx record) does not fit the git-revision-pin pattern that script validates, and registering it there would falsely imply automated-CI-gate status for a fundamentally different kind of evidence."
+    }
+  },
+  "verification": {
+    "method": "For each contract: (1) derived/obtained salt and init code from a verifiable upstream source (frozen vendor artifact for the Exact proxy; the real on-chain CREATE2 creation transaction for the validator), (2) reproduced the exact canonical address via `cast compute-address`, (3) pre-verified expected gas usage and runtime code hash by CREATE2-deploying through the real Arachnid deployer on a disposable local anvil instance, (4) deployed to GIWA Sepolia via `cast send` to the Arachnid deployer using the funded dev wallet, (5) confirmed receipt status 0x1 and re-read runtime code hash and (for the Exact proxy) the PERMIT2() getter through the validation RPC.",
+    "ironRule": "Only init code whose cast compute-address via the Arachnid deployer reproduces exactly the required hardcoded address (0xdAcD51A54883eb67D95FAEb2BBfdC4a9a6BD2a3B or 0x402085c248EeA27D92E8b30b2C58ed07f9E20001) was deployed. No substitute or approximate bytecode was ever considered."
+  },
+  "facilitatorSmokeTest": {
+    "image": "ghcr.io/x402-rs/x402-facilitator@sha256:89ab5c031f48bdb61837a0e0ebd296d9f5d3d34eb49183f5472774ab1b119b0d",
+    "result": "PASS after this deployment. Full stage table, raw request/response bodies, and container logs recorded in /tmp/x402-facilitator-smoke2/report.md (not committed).",
+    "settlementTransaction": "0x890c08920ae4672b27204fc2b0a2073264148d48f85792db7b6e5424ff9e265a"
+  }
+}

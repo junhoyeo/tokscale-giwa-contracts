@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "purpose": "Documents the verified upstream provenance of the ERC-6492/ERC-1271/EOA UniversalSigValidator singleton that the pinned x402-rs facilitator (rev 0b14f39afb604a7df25b3496ba34122bdca45a7f) unconditionally requires at the chain-independent address 0xdAcD51A54883eb67D95FAEb2BBfdC4a9a6BD2a3B for every configured eip155 chain. This file is NOT registered in contracts/scripts/verify-source-locks.mjs's SOURCE_LOCK_PATHS and is not part of the automated CI verification gate — it is a manual, one-time provenance derivation recorded for audit, mirroring the discipline of the SOURCE.lock files without claiming their automated-verification status.",
+  "contractName": "UniversalSigValidator",
+  "aliasFileName": "Validator6492.sol",
+  "license": "CC0",
+  "canonicalAddress": "0xdAcD51A54883eb67D95FAEb2BBfdC4a9a6BD2a3B",
+  "distinctFromAmbireCanonicalDeployment": "Ambire's own publicly documented UniversalSigValidator singleton (deployed via the ERC-2470 Singleton Factory with salt 0x0) lives at a DIFFERENT address, 0x7dD271FA79Df3A5fEB99F73Bebfa4395b2e4f4bE. The address x402-rs hardcodes (0xdAcD51A54883eb67D95FAEb2BBfdC4a9a6BD2a3B) is a distinct instance of the same open-source (CC0) contract, deployed separately via the Arachnid CREATE2 deployer with a different, vanity-mined salt. Source code is identical in shape/interface (isValidSig, isValidSigWithSideEffects) but this is a separate deployment, not Ambire's own singleton.",
+  "sourcify": {
+    "chainId": 8453,
+    "chainName": "Base mainnet",
+    "address": "0xdAcD51A54883eb67D95FAEb2BBfdC4a9a6BD2a3B",
+    "matchId": "9040230",
+    "verifiedAt": "2025-09-03T12:03:37Z",
+    "creationMatch": "match",
+    "runtimeMatch": "match",
+    "apiUrlUsed": "https://sourcify.dev/server/v2/contract/8453/0xdAcD51A54883eb67D95FAEb2BBfdC4a9a6BD2a3B?fields=all",
+    "compiler": "solc 0.8.30+commit.73712a01",
+    "compilerSettings": {
+      "viaIR": true,
+      "evmVersion": "prague",
+      "optimizer": { "enabled": true, "runs": 200 },
+      "metadata": { "appendCBOR": false, "bytecodeHash": "none", "useLiteralContent": false },
+      "remappings": ["forge-std/=lib/forge-std/src/"]
+    },
+    "sourceFiles": ["src/Validator6492.sol", "src/UniversalSigValidator.sol"],
+    "note": "Sourcify reports two source-file keys (Validator6492.sol and UniversalSigValidator.sol) with byte-identical content (5240 bytes each) — the same file compiled/registered under two names. Vendored here as src/Validator6492.sol, matching Sourcify's primary sourceId."
+  },
+  "onChainCreationRecord": {
+    "chainId": 8453,
+    "chainName": "Base mainnet",
+    "transactionHash": "0x2eb9da268b0f6e62a4359eb82f7d0cdb1d8c8672d4c4fb6502310f0b3d0f3a45",
+    "blockNumber": "35055502",
+    "transactionIndex": "255",
+    "fromEoa": "0xfa3F54AE9C4287CA09a486dfaFaCe7d1d4095d93",
+    "to": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+    "create2Deployer": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+    "create2DeployerProvenance": "Arachnid deterministic CREATE2 deployment proxy, the same well-known singleton preinstalled on GIWA Sepolia (0x4e59b44847b379578588920cA78FbF26c0B4956C, runtime hash 0x2fa86add0aed31f33a762c9d88e807c475bd51d0f52bd0955754b2608f7e4989)",
+    "salt": "0x7834303200000000000000000000000000000000000000000000000000000000",
+    "saltNote": "First 4 bytes are the ASCII string 'x402' (0x78343032), zero-padded to a 32-byte word — a vanity-mined salt for x402's own singleton instance of this contract.",
+    "calldataStructure": "0x<32-byte salt><init code>, sent directly to the Arachnid CREATE2 deployer, extracted verbatim via eth_getTransactionByHash against https://mainnet.base.org",
+    "constructorArgs": "none (UniversalSigValidator has no constructor; init code equals creation code exactly)",
+    "initCodeBytes": 2402,
+    "initCodeHash": "0x8a457240279c04f74154e0e10ecbeb78d2f2a8b68f5fb09658da494d89bb475e",
+    "runtimeCodeBytes": 2376,
+    "runtimeCodeHash": "0x9b83857bbb34de3ba755156ba9bee06532be5ff539bf5de301a28606c76d6cab",
+    "crossChainRuntimeObservation": "Identical runtime bytecode independently confirmed via eth_getCode at 0xdAcD51A54883eb67D95FAEb2BBfdC4a9a6BD2a3B on Base mainnet (chain 8453) and Base Sepolia (chain 84532)."
+  },
+  "verification": {
+    "method": "(1) fetched the real CREATE2 creation transaction for this address from Base mainnet via eth_getTransactionByHash and confirmed its `to` is the Arachnid CREATE2 deployer; (2) split its calldata into the 32-byte salt prefix and the remaining init code; (3) `cast compute-address 0x4e59b44847b379578588920cA78FbF26c0B4956C --salt 0x7834303200000000000000000000000000000000000000000000000000000000 --init-code <extracted init code>` reproduced 0xdAcD51A54883eb67D95FAEb2BBfdC4a9a6BD2a3B EXACTLY; (4) independently re-deployed that same salt + init code via CREATE2 through the Arachnid deployer on a disposable local anvil instance (bootstrapped with the canonical keyless-deployer raw transaction, the same mechanism infra/local-chain/deploy-local.sh's install_create2_deployer() uses) and confirmed the resulting runtime code hash (0x9b83857bbb34de3ba755156ba9bee06532be5ff539bf5de301a28606c76d6cab) is byte-identical to the hash independently observed live on Base mainnet via eth_getCode.",
+    "sourceAuthenticityCorroboration": "Sourcify's own independent recompilation of the vendored src/Validator6492.sol (solc 0.8.30, viaIR, evmVersion prague, optimizer runs=200, no CBOR metadata) reports creationMatch=match and runtimeMatch=match against the live Base mainnet bytecode, corroborating that the vendored source is authentic and not merely runtime-bytecode-derived.",
+    "notReproducedFromFreshCompile": "This repository did not independently recompile src/Validator6492.sol with a local Foundry profile to reproduce the init code byte-for-byte; the init code used for deployment planning is the literal bytes extracted from the real on-chain creation transaction, which is direct primary evidence of the actual deployed artifact rather than a reconstruction of it — satisfying this repo's 'exact address reproduction from verifiable upstream source' bar via a verifiable deployment record, per the explicit allowance for this contract."
+  }
+}

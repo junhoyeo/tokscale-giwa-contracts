@@ -92,9 +92,3 @@ test/         Solidity tests for the tUSD EIP-3009 surface
 deployments/  Immutable public GIWA Sepolia deployment records
 upstream/     Provenance records for deployed x402 prerequisites
 ```
-
-## Related documentation
-
-- [Tokscale documentation](https://github.com/junhoyeo/tokscale-giwa-docs)
-- [Live evidence and exact public scope](https://github.com/junhoyeo/tokscale-giwa-docs/blob/main/overview/live-evidence.mdx)
-- [x402 on GIWA](https://github.com/junhoyeo/tokscale-giwa-docs/blob/main/gateway/x402-payments.mdx)

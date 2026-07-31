@@ -57,6 +57,7 @@ represented as Tokscale-authored work.
 
 This is public **testnet research infrastructure**.
 
+- **Tokscale has no native, utility, or governance token.**
 - `tUSD` is a test token with a permissionless faucet. It is not a stablecoin,
   has no monetary value, and is not authorized for production use.
 - The public `exact` and `upto` transactions prove settlement mechanics. They
